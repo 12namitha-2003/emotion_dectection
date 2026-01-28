@@ -8,7 +8,7 @@ import os
 # -------------------------------
 print("🔄 Loading model...")
 model = load_model("emotion_detection_model.h5")
-emotion_labels = ["angry", "disgust", "fear", "happy"]  # Change if your model has more classes
+emotion_labels = ["angry", "disgust", "fear", "happy"]  # adjust if needed
 print("✅ Model loaded successfully!\n")
 
 # -------------------------------
@@ -37,14 +37,13 @@ def predict_emotion_from_image(image_path):
 
     print(f"🧠 Predicted Emotion: {label} ({confidence:.2f}%)")
 
-    # Show image with label
+    # Show image
     img_color = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
     cv2.putText(img_color, f"{label} ({confidence:.1f}%)", (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
     cv2.imshow("🖼️ Image Emotion Detection", img_color)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
 
 # -------------------------------
 # Function for live webcam prediction
@@ -81,4 +80,28 @@ def live_emotion_detection():
             cv2.putText(frame, f"{label} ({confidence:.1f}%)", (x, y-10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
-        cv2.imshow("😊 Live Emotion Detection",
+        cv2.imshow("😊 Live Emotion Detection", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    print("👋 Webcam closed. Goodbye!")
+
+# -------------------------------
+# Main menu
+# -------------------------------
+if __name__ == "__main__":
+    print("Choose an option:")
+    print("1️⃣  Live Emotion Detection (Webcam)")
+    print("2️⃣  Detect Emotion from an Image File")
+
+    choice = input("Enter 1 or 2: ").strip()
+
+    if choice == "1":
+        live_emotion_detection()
+    elif choice == "2":
+        image_path = input("📂 Enter full image path: ").strip()
+        predict_emotion_from_image(image_path)
+    else:
+        print("❌ Invalid choice. Please enter 1 or 2.")
