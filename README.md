@@ -120,7 +120,11 @@ py -3.10 live.py
 - Support multiple face detection
 
 ---
-https://github.com/user-attachments/assets/b7fe85ce-5186-4c4a-b05d-c8c3aa65e799
+
+
+https://github.com/user-attachments/assets/b6bf8d1d-c366-49c3-a869-71d6a5949784
+
+
 
 
 https://github.com/user-attachments/assets/a472985c-63bc-42d6-9177-a152e8080059
